@@ -15,7 +15,27 @@ class Senator
       n.clear
     end
 
-    binding.pry
+  end
+
+  def self.new_new_from_website(s)
+    sen_array = []
+    s.shift
+    els = s.collect {|e| e.text}
+    counter = 0
+    els.each_with_index do |e, i|
+      if e.include?("Contact:")
+        sen_array << els[counter..i]
+        counter = i + 1
+      elsif e.include?("(202) 224-5054")
+        sen_array << els[counter..i]
+        counter = i + 1
+      elsif i < counter
+        next
+      end
+    end
+
+    #need to parse senator info
+
   end
 
   def initialize(first_name, last_name)
