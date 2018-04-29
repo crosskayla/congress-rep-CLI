@@ -51,10 +51,22 @@ class Senator
 
   def self.print_names
     all.each_with_index {|obj, i| puts "#{i+1}. #{obj.first_name} #{obj.last_name}"}
-    print_states
   end
 
   def self.print_states
+    s = all.sort_by{|x| x.state}.collect{|x| x.state}
+    puts s.uniq.join(" | ")
+  end
+
+  def self.find_state_sens(state)
+    print "#{state} Senators - "
+    all.select{|x| x.state == state}.each do |sen|
+      print "| #{sen.first_name} #{sen.last_name} |"
+    end
+    puts
+  end
+
+  def self.print_state_sens
     all.sort_by!{|x| x.last_name}
     all.sort_by!{|x| x.state}
     prev_state = nil
