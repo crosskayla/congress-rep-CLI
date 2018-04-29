@@ -6,7 +6,7 @@ class Scraper
   end
 
   def scrape_senators
-    Senator.new_new_from_website(get_page.css('div.contenttext'))
+    Senator.new_from_website(get_page.css('div.contenttext'))
   end
 
 end
