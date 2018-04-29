@@ -25,27 +25,23 @@ class Senator
       senator.each do |elem|
         elem.gsub!(/\s{2,}/, "")
       end
-        temp = senator.first.split("- (")
-        names = temp[0].split(", ")
-        first_name, last_name = names[1], names[0]
-        party_state = temp[1].split(")")[0].split(" - ")
-        party, state = party_state[0], party_state[1]
-        address = senator[1]
-        phone = senator[2]
-        Senator.new(first_name, last_name, party, state, address, phone)
+      params = {}
+      temp = senator.first.split("- (")
+      names = temp[0].split(", ")
+      params["first_name"] = names[1]
+      params["last_name"] = names[0]
+      party_state = temp[1].split(")")[0].split(" - ")
+      params["party"] = party_state[0]
+      params["state"] = party_state[1]
+      params["address"] = senator[1]
+      params["phone"] = senator[2]
+      Senator.new(params)
     end
-
-    #need to parse senator info
 
   end
 
-  def initialize(first_name, last_name, party, state, address, phone)
-    @first_name = first_name
-    @last_name = last_name
-    @party = party
-    @state = state
-    @address = address
-    @phone = phone
+  def initialize(params = {})
+    params.each { |key, value| send "#{key}=", value }
     @@all << self
   end
 
