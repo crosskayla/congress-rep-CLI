@@ -58,12 +58,21 @@ class Senator
     puts s.uniq.join(" | ")
   end
 
+  def print_contact_info
+    puts "Contact information for Senator #{self.first_name} #{self.last_name}:"
+    puts "\tAddress: #{self.address}"
+    puts "\tPhone number: #{self.phone}"
+    puts
+  end
+
   def self.find_state_sens(state)
-    print "#{state} Senators - "
-    all.select{|x| x.state == state}.each do |sen|
-      print "| #{sen.first_name} #{sen.last_name} |"
+    puts "#{state} Senators: "
+    found_sens = all.select{|x| x.state == state}
+    found_sens.each do |sen|
+      puts "\t\t#{sen.first_name} #{sen.last_name} - #{sen.party}"
     end
     puts
+    found_sens
   end
 
   def self.print_state_sens
@@ -72,9 +81,9 @@ class Senator
     prev_state = nil
     all.each do |x|
       if x.state == prev_state
-        puts " & #{x.first_name} #{x.last_name}"
+        puts " & #{x.first_name} #{x.last_name} (#{x.party})"
       else
-        print "#{x.state} - #{x.first_name} #{x.last_name}"
+        print "#{x.state} - #{x.first_name} #{x.last_name} (#{x.party})"
         prev_state = x.state
       end
     end
