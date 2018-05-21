@@ -13,9 +13,6 @@ class Senator
       if e.include?("Contact:")
         sen_array << els[counter..i]
         counter = i + 1
-      elsif e.include?("(202) 224-5054")
-        sen_array << els[counter..i]
-        counter = i + 1
       elsif i < counter
         next
       end
