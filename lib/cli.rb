@@ -11,7 +11,7 @@ class CLI
       input = gets.strip
       case input
       when "list"
-        Senator.print_state_sens
+        print_state_sens
       when "state"
         puts "Please enter your state:"
         input = gets.strip
@@ -21,7 +21,10 @@ class CLI
         puts "Otherwise, type 'no' to go to the main menu."
         input = gets.strip
         puts
-        found_sens.each{|s| print_contact_info(s)} if input == "yes"
+        if input == "yes"
+          found_sens.each{|s| print_contact_info(s)}
+          sleep(8)
+        end
       end
     end
     puts "Thanks for using CongressCLI."
@@ -38,6 +41,18 @@ class CLI
     puts "\tAddress: #{senator_obj.address}"
     puts "\tPhone number: #{senator_obj.phone}"
     puts
+  end
+  
+  def print_state_sens
+    prev_state = nil
+    Senator.all.each do |x|
+      if x.state == prev_state
+        puts " & #{x.first_name} #{x.last_name} (#{x.party})"
+      else
+        print "#{x.state} - #{x.first_name} #{x.last_name} (#{x.party})"
+        prev_state = x.state
+      end
+    end
   end
 
 end

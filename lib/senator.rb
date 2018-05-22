@@ -39,7 +39,10 @@ class Senator
       params["phone"] = senator[2]
       Senator.new(params)
     end
-
+    
+    self.all.sort_by!{|x| x.last_name}
+    self.all.sort_by!{|x| x.state}
+    
   end
 
   def self.all
@@ -55,8 +58,6 @@ class Senator
     puts s.uniq.join(" | ")
   end
 
-
-
   def self.find_state_sens(state)
     puts "#{state} Senators: "
     found_sens = all.select{|x| x.state == state}
@@ -67,18 +68,5 @@ class Senator
     found_sens
   end
 
-  def self.print_state_sens
-    all.sort_by!{|x| x.last_name}
-    all.sort_by!{|x| x.state}
-    prev_state = nil
-    all.each do |x|
-      if x.state == prev_state
-        puts " & #{x.first_name} #{x.last_name} (#{x.party})"
-      else
-        print "#{x.state} - #{x.first_name} #{x.last_name} (#{x.party})"
-        prev_state = x.state
-      end
-    end
-  end
 
 end
