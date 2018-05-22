@@ -1,5 +1,4 @@
-dirname = File.basename(Dir.getwd)
-require_relative "../#{dirname}/config/environment"
+require_relative "../config/environment"
 
 s = Scraper.new
 s.scrape_senators
