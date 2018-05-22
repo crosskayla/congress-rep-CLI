@@ -55,12 +55,7 @@ class Senator
     puts s.uniq.join(" | ")
   end
 
-  def print_contact_info
-    puts "Contact information for Senator #{self.first_name} #{self.last_name}:"
-    puts "\tAddress: #{self.address}"
-    puts "\tPhone number: #{self.phone}"
-    puts
-  end
+
 
   def self.find_state_sens(state)
     puts "#{state} Senators: "

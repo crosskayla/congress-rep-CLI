@@ -21,7 +21,7 @@ class CLI
         puts "Otherwise, type 'no' to go to the main menu."
         input = gets.strip
         puts
-        found_sens.each{|s| s.print_contact_info} if input == "yes"
+        found_sens.each{|s| print_contact_info(s)} if input == "yes"
       end
     end
     puts "Thanks for using CongressCLI."
@@ -31,6 +31,13 @@ class CLI
     sleep(1)
     print "1... "
     sleep(1)
+  end
+  
+  def print_contact_info(senator_obj)
+    puts "Contact information for Senator #{senator_obj.first_name} #{senator_obj.last_name}:"
+    puts "\tAddress: #{senator_obj.address}"
+    puts "\tPhone number: #{senator_obj.phone}"
+    puts
   end
 
 end
