@@ -11,19 +11,21 @@ class CLI
       input = gets.strip
       case input
       when "list"
-        print_state_sens
+        print_all_sens
       when "state"
         puts "Please enter your state:"
         input = gets.strip
         puts
-        found_sens = Senator.find_state_sens(input)
+        found_sens = Senator.all.select{|x| x.state == input}
+        puts "#{input} Senators: "
+        print_state_sens(found_sens)
         puts "Would you like contact information for your senators? If so, type 'yes.'"
         puts "Otherwise, type 'no' to go to the main menu."
-        input = gets.strip
+        input = gets.strip.downcase
         puts
         if input == "yes"
           found_sens.each{|s| print_contact_info(s)}
-          sleep(8)
+          sleep(5)
         end
       end
     end
@@ -43,7 +45,7 @@ class CLI
     puts
   end
   
-  def print_state_sens
+  def print_all_sens
     prev_state = nil
     Senator.all.each do |x|
       if x.state == prev_state
@@ -53,6 +55,13 @@ class CLI
         prev_state = x.state
       end
     end
+  end
+
+  def print_state_sens(found_sens)
+    found_sens.each do |sen|
+      puts "\t\t#{sen.first_name} #{sen.last_name} - #{sen.party}"
+    end
+    puts
   end
 
 end

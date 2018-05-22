@@ -58,15 +58,5 @@ class Senator
     puts s.uniq.join(" | ")
   end
 
-  def self.find_state_sens(state)
-    puts "#{state} Senators: "
-    found_sens = all.select{|x| x.state == state}
-    found_sens.each do |sen|
-      puts "\t\t#{sen.first_name} #{sen.last_name} - #{sen.party}"
-    end
-    puts
-    found_sens
-  end
-
 
 end
