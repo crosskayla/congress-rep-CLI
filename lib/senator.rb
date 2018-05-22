@@ -3,6 +3,11 @@ class Senator
   attr_accessor :first_name, :last_name, :party, :state, :address, :phone
 
   @@all = []
+  
+  def initialize(params = {})
+    params.each { |key, value| send "#{key}=", value }
+    @@all << self
+  end
 
   def self.new_from_website(s)
     sen_array = []
@@ -35,11 +40,6 @@ class Senator
       Senator.new(params)
     end
 
-  end
-
-  def initialize(params = {})
-    params.each { |key, value| send "#{key}=", value }
-    @@all << self
   end
 
   def self.all
