@@ -18,7 +18,7 @@ class Senator
       end
     end
 
-    t = sen_array.each do |senator|
+    sen_array.each do |senator|
       senator.each do |elem|
         elem.gsub!(/\s{2,}/, "")
       end
